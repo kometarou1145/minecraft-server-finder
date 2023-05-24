@@ -5,7 +5,7 @@ import socket
 def check(ip, port):
 
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    sock.settimeout(10000)
+    sock.settimeout(20000)
 
     try:
         sock.connect((ip, port))
@@ -33,11 +33,11 @@ def finalCheck():
         port = 25565
 
         if check(ip, port):
-            save("bruh.txt", f"{ip}:25565")
+            save("ip.txt", f"{ip}:25565")
             print(f"Port 25565 is open ({ip})")
         else:
             print(f"Port 25565 is not open ({ip})")
 
-with ThreadPoolExecutor(max_workers=10000) as e:
+with ThreadPoolExecutor(max_workers=20000) as e:
     while True:
         e.submit(finalCheck)
